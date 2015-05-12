@@ -406,7 +406,11 @@ static NSMutableDictionary* globalSVGKImageCache;
 	 You can always re-calculate the "original" viewport by looking at self.DOMTree.width and self.DOMTree.height
 	 */
 	self.DOMTree.viewport = SVGRectMake(0,0,newSize.width,newSize.height); // implicitly resizes all the internal rendering of the SVG
-	
+    self.DOMTree.x = [SVGLength svgLengthFromNSString:@"0"];
+    self.DOMTree.y = [SVGLength svgLengthFromNSString:@"0"];
+    self.DOMTree.width = [SVGLength svgLengthFromNSString:[NSString stringWithFormat:@"%f",newSize.width]];
+    self.DOMTree.height = [SVGLength svgLengthFromNSString:[NSString stringWithFormat:@"%f",newSize.height]];
+
 	/** invalidate all cached data that's dependent upon SVG's size */
 	self.CALayerTree = nil; // invalidate the cached copy
 }
